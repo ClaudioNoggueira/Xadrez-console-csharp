@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Xadrez_Console.Tabuleiro {
-    enum Color {
+    enum Cor {
         Branca, Preta, Amarela, Azul, Vermelha, Laranja
     }
 }

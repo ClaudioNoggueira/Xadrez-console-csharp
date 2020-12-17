@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using Xadrez_Console.Tabuleiro;
 using Xadrez_Console.Xadrez;
 

@@ -1,5 +1,4 @@
-﻿using System;
-using Xadrez_Console.Tabuleiro;
+﻿using Xadrez_Console.Tabuleiro;
 
 namespace Xadrez_Console.Xadrez {
     class PartidaDeXadrez {

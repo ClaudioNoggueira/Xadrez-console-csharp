@@ -1,9 +1,9 @@
-﻿namespace Tabuleiro {
-    class Posicao {
+﻿namespace Xadrez_Console.Tabuleiro {
+    class Position {
         public int Linha { get; set; }
         public int Coluna { get; set; }
 
-        public Posicao(int linha, int coluna) {
+        public Position(int linha, int coluna) {
             Linha = linha;
             Coluna = coluna;
         }

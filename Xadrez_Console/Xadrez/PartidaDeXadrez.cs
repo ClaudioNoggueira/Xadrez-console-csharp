@@ -3,8 +3,8 @@
 namespace Xadrez_Console.Xadrez {
     class PartidaDeXadrez {
         public Tabuleiro.Tabuleiro tabuleiro { get; private set; }
-        private int turno;
-        private Cor jogadorAtual;
+        public int turno { get; private set; }
+        public Cor jogadorAtual { get; private set; }
         public bool terminada { get; private set; }
 
         public PartidaDeXadrez() {
@@ -14,6 +14,39 @@ namespace Xadrez_Console.Xadrez {
             terminada = false;
             colocarPecas();
              
+        }
+
+        public void realizaJogada(Posicao origem, Posicao destino) {
+            executarMovimento(origem, destino);
+            turno++;
+            mudarJogador();
+        }
+
+        public void validarPosicaoDeOrigem(Posicao pos) {
+            if (tabuleiro.peca(pos) == null) {
+                throw new TabuleiroException("Não existe peça na posição de origem escolhida!");
+            }
+            if(jogadorAtual != tabuleiro.peca(pos).cor) {
+                throw new TabuleiroException("A peça de origem escolhida não é sua!");
+            }
+            if (!tabuleiro.peca(pos).existeMovimentosPossiveis()) {
+                throw new TabuleiroException("Não há movimentos possíveis para a peça de origem escolhida!");
+            }
+        }
+
+        public void validarPosicaoDeDestino(Posicao origem, Posicao destino) {
+            if (!tabuleiro.peca(origem).podeMoverPara(destino)) {
+                throw new TabuleiroException("Posição de destino inválida");
+            }
+        }
+
+        private void mudarJogador() {
+            if(jogadorAtual == Cor.Branca) {
+                jogadorAtual = Cor.Preta;
+            }
+            else {
+                jogadorAtual = Cor.Branca;
+            }
         }
 
         public void executarMovimento(Posicao origem, Posicao destino) {

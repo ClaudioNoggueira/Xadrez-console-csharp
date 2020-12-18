@@ -10,62 +10,62 @@ namespace Xadrez_Console.Xadrez {
             return "R";
         }
 
-        private bool podeMover(Posicao posicao) {
-            Peca peca = tabuleiro.peca(posicao);
+        private bool podeMover(Posicao pos) {
+            Peca peca = tabuleiro.peca(pos);
             return peca == null || peca.cor != this.cor;
         }
 
         public override bool[,] movimentosPossiveis() {
             bool[,] mat = new bool[tabuleiro.Linhas, tabuleiro.Colunas];
 
-            Posicao posicao = new Posicao(0, 0);
+            Posicao pos = new Posicao(0, 0);
 
             //Acima
-            posicao.definirValores(posicao.Linha - 1, posicao.Coluna);
-            if (tabuleiro.posicaoValida(posicao) && podeMover(posicao)) {
-                mat[posicao.Linha, posicao.Coluna] = true;
+            pos.definirValores(posicao.Linha - 1, posicao.Coluna);
+            if (tabuleiro.posicaoValida(pos) && podeMover(pos)) {
+                mat[pos.Linha, pos.Coluna] = true;
             }
 
             //Nordeste
-            posicao.definirValores(posicao.Linha - 1, posicao.Coluna + 1);
-            if (tabuleiro.posicaoValida(posicao) && podeMover(posicao)) {
-                mat[posicao.Linha, posicao.Coluna] = true;
+            pos.definirValores(posicao.Linha - 1, posicao.Coluna + 1);
+            if (tabuleiro.posicaoValida(pos) && podeMover(pos)) {
+                mat[pos.Linha, pos.Coluna] = true;
             }
 
             //Direita
-            posicao.definirValores(posicao.Linha, posicao.Coluna);
-            if (tabuleiro.posicaoValida(posicao) && podeMover(posicao)) {
-                mat[posicao.Linha, posicao.Coluna] = true;
+            pos.definirValores(posicao.Linha, posicao.Coluna + 1);
+            if (tabuleiro.posicaoValida(pos) && podeMover(pos)) {
+                mat[pos.Linha, pos.Coluna] = true;
             }
 
             //Sudeste
-            posicao.definirValores(posicao.Linha + 1, posicao.Coluna + 1);
-            if (tabuleiro.posicaoValida(posicao) && podeMover(posicao)) {
-                mat[posicao.Linha, posicao.Coluna] = true;
+            pos.definirValores(posicao.Linha + 1, posicao.Coluna + 1);
+            if (tabuleiro.posicaoValida(pos) && podeMover(pos)) {
+                mat[pos.Linha, pos.Coluna] = true;
             }
 
             //Abaixo
-            posicao.definirValores(posicao.Linha + 1, posicao.Coluna);
-            if (tabuleiro.posicaoValida(posicao) && podeMover(posicao)) {
-                mat[posicao.Linha, posicao.Coluna] = true;
+            pos.definirValores(posicao.Linha + 1, posicao.Coluna);
+            if (tabuleiro.posicaoValida(pos) && podeMover(pos)) {
+                mat[pos.Linha, pos.Coluna] = true;
             }
 
             //Sudoeste
-            posicao.definirValores(posicao.Linha + 1, posicao.Coluna - 1);
-            if (tabuleiro.posicaoValida(posicao) && podeMover(posicao)) {
-                mat[posicao.Linha, posicao.Coluna] = true;
+            pos.definirValores(posicao.Linha + 1, posicao.Coluna - 1);
+            if (tabuleiro.posicaoValida(pos) && podeMover(pos)) {
+                mat[pos.Linha, pos.Coluna] = true;
             }
 
             //Esquerda
-            posicao.definirValores(posicao.Linha, posicao.Coluna - 1);
-            if (tabuleiro.posicaoValida(posicao) && podeMover(posicao)) {
-                mat[posicao.Linha, posicao.Coluna] = true;
+            pos.definirValores(posicao.Linha, posicao.Coluna - 1);
+            if (tabuleiro.posicaoValida(pos) && podeMover(pos)) {
+                mat[pos.Linha, pos.Coluna] = true;
             }
 
             //Noroeste
-            posicao.definirValores(posicao.Linha - 1, posicao.Coluna - 1);
-            if (tabuleiro.posicaoValida(posicao) && podeMover(posicao)) {
-                mat[posicao.Linha, posicao.Coluna] = true;
+            pos.definirValores(posicao.Linha - 1, posicao.Coluna - 1);
+            if (tabuleiro.posicaoValida(pos) && podeMover(pos)) {
+                mat[pos.Linha, pos.Coluna] = true;
             }
 
             return mat;

@@ -6,54 +6,54 @@ namespace Xadrez_Console.Xadrez {
 
         }
 
-        private bool podeMover(Posicao posicao) {
-            Peca peca = tabuleiro.peca(posicao);
-            return peca == null || peca.cor != this.cor;
+        private bool podeMover(Posicao pos) {
+            Peca peca = tabuleiro.peca(pos);
+            return peca == null || peca.cor != cor;
         }
 
         public override bool[,] movimentosPossiveis() {
             bool[,] mat = new bool[tabuleiro.Linhas, tabuleiro.Colunas];
 
-            Posicao posicao = new Posicao(0, 0);
+            Posicao pos = new Posicao(0, 0);
 
             //Acima
-            posicao.definirValores(posicao.Linha - 1, posicao.Coluna);
-            while (tabuleiro.posicaoValida(posicao) && podeMover(posicao)) {
-                mat[posicao.Linha, posicao.Coluna] = true;
-                if(tabuleiro.peca(posicao) != null && tabuleiro.peca(posicao).cor != this.cor) {
+            pos.definirValores(posicao.Linha - 1, posicao.Coluna);
+            while (tabuleiro.posicaoValida(pos) && podeMover(pos)) {
+                mat[pos.Linha, pos.Coluna] = true;
+                if(tabuleiro.peca(pos) != null && tabuleiro.peca(pos).cor != cor) {
                     break;
                 }
-                posicao.Linha = posicao.Linha - 1;
+                pos.Linha -= 1;
             }
 
             //Abaixo
-            posicao.definirValores(posicao.Linha + 1, posicao.Coluna);
-            while (tabuleiro.posicaoValida(posicao) && podeMover(posicao)) {
-                mat[posicao.Linha, posicao.Coluna] = true;
-                if (tabuleiro.peca(posicao) != null && tabuleiro.peca(posicao).cor != this.cor) {
+            pos.definirValores(posicao.Linha + 1, posicao.Coluna);
+            while (tabuleiro.posicaoValida(pos) && podeMover(pos)) {
+                mat[pos.Linha, pos.Coluna] = true;
+                if (tabuleiro.peca(pos) != null && tabuleiro.peca(pos).cor != cor) {
                     break;
                 }
-                posicao.Linha = posicao.Linha + 1;
+                pos.Linha += 1;
             }
 
             //Direita
-            posicao.definirValores(posicao.Linha, posicao.Coluna + 1);
-            while (tabuleiro.posicaoValida(posicao) && podeMover(posicao)) {
-                mat[posicao.Linha, posicao.Coluna] = true;
-                if (tabuleiro.peca(posicao) != null && tabuleiro.peca(posicao).cor != this.cor) {
+            pos.definirValores(posicao.Linha, posicao.Coluna + 1);
+            while (tabuleiro.posicaoValida(pos) && podeMover(pos)) {
+                mat[pos.Linha, pos.Coluna] = true;
+                if (tabuleiro.peca(pos) != null && tabuleiro.peca(pos).cor != cor) {
                     break;
                 }
-                posicao.Coluna = posicao.Coluna + 1;
+                pos.Coluna += 1;
             }
 
             //Esquerda
-            posicao.definirValores(posicao.Linha, posicao.Coluna - 1);
-            while (tabuleiro.posicaoValida(posicao) && podeMover(posicao)) {
-                mat[posicao.Linha, posicao.Coluna] = true;
-                if (tabuleiro.peca(posicao) != null && tabuleiro.peca(posicao).cor != this.cor) {
+            pos.definirValores(posicao.Linha, posicao.Coluna - 1);
+            while (tabuleiro.posicaoValida(pos) && podeMover(pos)) {
+                mat[pos.Linha, pos.Coluna] = true;
+                if (tabuleiro.peca(pos) != null && tabuleiro.peca(pos).cor != cor) {
                     break;
                 }
-                posicao.Coluna = posicao.Coluna - 1;
+                pos.Coluna -= 1;
             }
 
             return mat;

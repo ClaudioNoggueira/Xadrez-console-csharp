@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Cryptography;
 using Xadrez_Console.Tabuleiro;
 
 namespace Xadrez_Console.Xadrez {
@@ -31,17 +32,54 @@ namespace Xadrez_Console.Xadrez {
             if (pecaCapturada != null) {
                 capturadas.Add(pecaCapturada);
             }
+
+            //#Jogada especial roque pequeno
+            if (peca is Rei && destino.Coluna == origem.Coluna + 2) {
+                Posicao origemT = new Posicao(origem.Linha, origem.Coluna + 3);
+                Posicao destinoT = new Posicao(origem.Linha, origem.Coluna + 1);
+                Peca torre = tabuleiro.retirarPeca(origemT);
+                torre.incrementarQtdMovimentos();
+                tabuleiro.colocarPeca(torre, destinoT);
+            }
+
+            //#Jogada especial roque grande
+            if (peca is Rei && destino.Coluna == origem.Coluna - 2) {
+                Posicao origemT = new Posicao(origem.Linha, origem.Coluna - 4);
+                Posicao destinoT = new Posicao(origem.Linha, origem.Coluna - 1);
+                Peca torre = tabuleiro.retirarPeca(origemT);
+                torre.incrementarQtdMovimentos();
+                tabuleiro.colocarPeca(torre, destinoT);
+            }
+
             return pecaCapturada;
         }
 
         public void desfazMovimento(Posicao origem, Posicao destino, Peca pecaCapturada) {
-            Peca p = tabuleiro.retirarPeca(destino);
-            p.decrementarQtdMovimentos();
+            Peca peca = tabuleiro.retirarPeca(destino);
+            peca.decrementarQtdMovimentos();
             if (pecaCapturada != null) {
                 tabuleiro.colocarPeca(pecaCapturada, destino);
                 capturadas.Remove(pecaCapturada);
             }
-            tabuleiro.colocarPeca(p, origem);
+            tabuleiro.colocarPeca(peca, origem);
+
+            //#Jogada especial roque pequeno
+            if (peca is Rei && destino.Coluna == origem.Coluna + 2) {
+                Posicao origemT = new Posicao(origem.Linha, origem.Coluna + 3);
+                Posicao destinoT = new Posicao(origem.Linha, origem.Coluna + 1);
+                Peca torre = tabuleiro.retirarPeca(origemT);
+                torre.decrementarQtdMovimentos();
+                tabuleiro.colocarPeca(torre, origemT);
+            }
+
+            //#Jogada especial roque grande
+            if (peca is Rei && destino.Coluna == origem.Coluna - 2) {
+                Posicao origemT = new Posicao(origem.Linha, origem.Coluna - 4);
+                Posicao destinoT = new Posicao(origem.Linha, origem.Coluna - 1);
+                Peca torre = tabuleiro.retirarPeca(destinoT);
+                torre.incrementarQtdMovimentos();
+                tabuleiro.colocarPeca(torre, origemT);
+            }
         }
 
         public void realizaJogada(Posicao origem, Posicao destino) {
@@ -185,7 +223,7 @@ namespace Xadrez_Console.Xadrez {
             colocarNovaPeca('b', 1, new Cavalo(tabuleiro, Cor.Branca));
             colocarNovaPeca('c', 1, new Bispo(tabuleiro, Cor.Branca));
             colocarNovaPeca('d', 1, new Dama(tabuleiro, Cor.Branca));
-            colocarNovaPeca('e', 1, new Rei(tabuleiro, Cor.Branca));
+            colocarNovaPeca('e', 1, new Rei(tabuleiro, Cor.Branca, this));
             colocarNovaPeca('f', 1, new Bispo(tabuleiro, Cor.Branca));
             colocarNovaPeca('g', 1, new Cavalo(tabuleiro, Cor.Branca));
             colocarNovaPeca('h', 1, new Torre(tabuleiro, Cor.Branca));
@@ -202,7 +240,7 @@ namespace Xadrez_Console.Xadrez {
             colocarNovaPeca('b', 8, new Cavalo(tabuleiro, Cor.Preta));
             colocarNovaPeca('c', 8, new Bispo(tabuleiro, Cor.Preta));
             colocarNovaPeca('d', 8, new Dama(tabuleiro, Cor.Preta));
-            colocarNovaPeca('e', 8, new Rei(tabuleiro, Cor.Preta));
+            colocarNovaPeca('e', 8, new Rei(tabuleiro, Cor.Preta, this));
             colocarNovaPeca('f', 8, new Bispo(tabuleiro, Cor.Preta));
             colocarNovaPeca('g', 8, new Cavalo(tabuleiro, Cor.Preta));
             colocarNovaPeca('h', 8, new Torre(tabuleiro, Cor.Preta));
